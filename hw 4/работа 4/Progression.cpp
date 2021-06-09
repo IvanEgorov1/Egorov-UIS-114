@@ -1,45 +1,57 @@
-﻿#include "Progression.h"
+#include "Prog_2.h"
  
-Progression :: Progression (double a0, double delta): first_element (a0), delta (дельта) {}
+DivisionByZero_1::DivisionByZero_1() : message("Division by zero_1") {}
  
-double Progression :: GetIndexElement (целое число) const {}
+DivisionByZero_2::DivisionByZero_2() : logic_error("Division by zero_2") {}
  
-double Progression :: GetSumBeforeNumber (целое число) const {}
+Complex::Complex(double re, double im) : re(re), im(im) {}
  
- 
-ArithmeticProgression :: ArithmeticProgression (двойное a0, двойное дельта): Progression (a0, delta) {}
- 
-double ArithmeticProgression :: GetIndexElement (целое число) const {
-    двойной ответ = первый_элемент;
-    for (int i = 0; i <number - 1; ++ i) {
-        ответ + = дельта;
-    }
-    ответный ответ;
+Complex Complex::First_Division(const Complex& other) const noexcept {
+    return Complex((re * other.re + im * other.im) / (other.re * other.re + other.im * other.im),
+                   (im * other.re - re * other.im) / (other.re * other.re + other.im * other.im));
 }
  
-double ArithmeticProgression :: GetSumBeforeNumber (целое число) const {
-    двойной ответ = первый_элемент;
-    for (int i = 2; i <= number; ++ i) {
-        answer + = GetIndexElement (i);
+Complex Complex::Second_Division(const Complex& other) const {
+    if (other.re == double(0) && other.im == double(0)) {
+        throw 0;
     }
-    ответный ответ;
+    return Complex((re * other.re + im * other.im) / (other.re * other.re + other.im * other.im),
+                   (im * other.re - re * other.im) / (other.re * other.re + other.im * other.im));
 }
  
- 
-GeometricProgression :: GeometricProgression (double start_element, double delta): Progression (start_element, delta) {}
- 
-double GeometricProgression :: GetIndexElement (int number) const {
-    двойной ответ = первый_элемент;
-    for (int i = 0; i <number - 1; ++ i) {
-        ответ * = дельта;
+Complex Complex::Third_Division(const Complex& other) const {
+    if (other.re == double(0) && other.im == double(0)) {
+        throw std::runtime_error("Division by zero");
     }
-    ответный ответ;
+    return Complex((re * other.re + im * other.im) / (other.re * other.re + other.im * other.im),
+                   (im * other.re - re * other.im) / (other.re * other.re + other.im * other.im));
 }
  
-double GeometricProgression :: GetSumBeforeNumber (целое число) const {
-    двойной ответ = первый_элемент;
-    for (int i = 2; i <= number; ++ i) {
-        answer + = GetIndexElement (i);
+Complex Complex::Fourth_Division(const Complex& other) const {
+    if (other.re == double(0) && other.im == double(0)) {
+        throw DivisionByZero_1();
     }
-    ответный ответ;
+    return Complex((re * other.re + im * other.im) / (other.re * other.re + other.im * other.im),
+                   (im * other.re - re * other.im) / (other.re * other.re + other.im * other.im));
+}
+ 
+Complex Complex::Fifth_Division(const Complex& other) const {
+    if (other.re == double(0) && other.im == double(0)) {
+        throw DivisionByZero_2();
+    }
+    return Complex((re * other.re + im * other.im) / (other.re * other.re + other.im * other.im),
+                   (im * other.re - re * other.im) / (other.re * other.re + other.im * other.im));
+}
+ 
+Complex Complex::Six_Division(const Complex& other) const {
+    if (other.re == double(0) && other.im == double(0)) {
+        throw DivisionByZero_3();
+    }
+    return Complex((re * other.re + im * other.im) / (other.re * other.re + other.im * other.im),
+                   (im * other.re - re * other.im) / (other.re * other.re + other.im * other.im));
+}
+ 
+ostream& operator<<(ostream& os, const Complex& complex) {
+    os << '(' << complex.re << ", " << complex.im << ')' << endl;
+    return os;
 }
