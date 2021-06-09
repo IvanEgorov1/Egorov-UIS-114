@@ -1,40 +1,42 @@
-﻿#include "Progression.h"
+#include "Prog_2.h"
  
-int main () {
-    setlocale (LC_ALL, «русский»);
-    двойной first_element_1, delta_1;
-    cout << "Введите первый элемент арифметической прогрессии и параметр delta" << endl;
-    cin >> first_element_1 >> delta_1;
-    двойной первый_элемент_2, дельта_2;
-    cout << "Введите первый элемент геометрической прогрессии и параметр дельта" << endl;
-    cin >> first_element_2 >> delta_2;
+int main() {
+    double re_1, im_1, re_2, im_2;
+    cin >> re_1 >> im_1 >> re_2 >> im_2;
+    Complex A(re_1, im_1);
+    Complex B(re_2, im_2);
  
-    cout << "Выберите, с какой прогрессией хотите работать:" << endl;
-    cout << "0 - Арифметическая" << endl;
-    cout << "1 - Геометрическая" << endl;
+    A.First_Division(B);
  
-    int выбор;
-    cin >> выбор;
- 
-    if (choice) {
-        GeometricProgression geometryProgression (first_element_2, delta_2);
-        cout << "Введите номер элемента" << endl;
-        int число;
-        cin >> число;
-        cout << "Элемент под данным номером:";
-        cout << geometryProgression.GetIndexElement (число) << endl;
-        cout << "Сумма элементов до элмента с этим номером включительно:";
-        cout << geometryProgression.GetSumBeforeNumber (число);
-    } еще {
-        ArithmeticProgression arithmeticProgression (first_element_1, delta_1);
-        cout << "Введите номер элемента" << endl;
-        int число;
-        cin >> число;
-        cout << "Элемент под данным номером:";
-        cout << arithmeticProgression.GetIndexElement (число) << endl;
-        cout << "Сумма элементов до элемента с этим номером включительно:";
-        cout << arithmeticProgression.GetSumBeforeNumber (число) << endl;
+    try {
+        cout << A.Second_Division(B);
+    } catch (int) {
+        cout << "Error: Second_Division by zero" << endl;
     }
  
-    возврат 0;
+    try {
+        cout << A.Fourth_Division(B);
+    } catch (const DivisionByZero_1&) {
+        cout << "Error: Fourth Division by zero" << endl;
+    }
+ 
+    try {
+        cout << A.Fifth_Division(B);
+    } catch (const DivisionByZero_2&) {
+        cout << "Error: Fifth Division by zero" << endl;
+    }
+ 
+    try {
+        cout << A.Six_Division(B);
+    } catch (const DivisionByZero_3&) {
+        cout << "Error: Six Division by zero" << endl;
+    }
+ 
+    try {
+        cout << A.Third_Division(B);
+    } catch (const std::runtime_error&) {
+        cout << "Error: Third Division by zero" << endl;
+    }
+ 
+    return 0;
 }
